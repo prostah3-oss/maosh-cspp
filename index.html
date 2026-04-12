@@ -520,6 +520,28 @@ body{font-family:'Mulish',sans-serif;min-height:100vh;color:var(--txt);overflow-
       </div>
     </div>
 
+    <!-- AVANS CARD -->
+    <div class="pay-card avans" id="avansCard" style="display:none">
+      <div class="pay-card-title">💳 Аванс (28-30-юм)</div>
+      <div class="pay-card-sub">Аванс дар карта чи қадар гирифтӣ?</div>
+      <div class="pay-inp-row">
+        <input class="pay-inp" type="number" id="avansInp" placeholder="0 ₽" min="0">
+        <button class="pay-btn avans" onclick="saveAvans()">💾 Сабт</button>
+      </div>
+      <div class="pay-result" id="avansResult"></div>
+    </div>
+
+    <!-- ZARPLATA CARD -->
+    <div class="pay-card zarplata" id="zarplataCard" style="display:none">
+      <div class="pay-card-title">💵 Зарплата (13-17-юм)</div>
+      <div class="pay-card-sub">Зарплата дар карта чи қадар гирифтӣ?</div>
+      <div class="pay-inp-row">
+        <input class="pay-inp" type="number" id="zarplataInp" placeholder="0 ₽" min="0">
+        <button class="pay-btn zarplata" onclick="saveZarplata()">💾 Сабт</button>
+      </div>
+      <div class="pay-result" id="zarplataResult"></div>
+    </div>
+
     <div class="secttl">💰 Тафсили маош</div>
     <div class="brkd">
       <div class="br"><div class="brl"><span>⏱️</span><span id="lHr">Маоши соатӣ</span></div><span class="brv" id="bHr">0 ₽</span></div>
@@ -861,7 +883,7 @@ async function goMain(){
   await Promise.all([loadST(),loadEN()]);
   const nm=(CU.name&&CU.name.trim().length>0)?CU.name:CU.login;
   document.getElementById('uLbl').textContent='👤 '+nm;
-  updateUI();recalc();startClock();swTab(0);
+  updateUI();recalc();startClock();swTab(0);setTimeout(checkPayCards,500);
 }
 
 // ENTRIES
@@ -1087,6 +1109,77 @@ function updateProfileToggles(){
     const el=document.getElementById('st'+i);
     if(el){el.style.border=CU.shift===i?gold:def;el.style.background=CU.shift===i?goldbg:defbg;}
   });
+}
+
+// ===== AVANS / ZARPLATA =====
+function payKey(type){
+  const n=new Date();
+  return `pay_${type}_${CU.login}_${n.getFullYear()}_${n.getMonth()+1}`;
+}
+function getSavedPay(type){return parseFloat(localStorage.getItem(payKey(type)))||0;}
+function savePay(type,val){localStorage.setItem(payKey(type),val);}
+
+function checkPayCards(){
+  const n=new Date();
+  const d=n.getDate();
+  const avansCard=document.getElementById('avansCard');
+  const zarplataCard=document.getElementById('zarplataCard');
+
+  // Avans: 28-30
+  if(d>=28&&d<=30){
+    avansCard.style.display='block';
+    const saved=getSavedPay('avans');
+    if(saved>0){
+      document.getElementById('avansInp').value=saved;
+      showPayResult('avans',saved);
+    }
+  } else {
+    avansCard.style.display='none';
+  }
+
+  // Zarplata: 13-17
+  if(d>=13&&d<=17){
+    zarplataCard.style.display='block';
+    const saved=getSavedPay('zarplata');
+    if(saved>0){
+      document.getElementById('zarplataInp').value=saved;
+      showPayResult('zarplata',saved);
+    }
+  } else {
+    zarplataCard.style.display='none';
+  }
+}
+
+function showPayResult(type,paid){
+  const total=parseFloat(document.getElementById('sTotal').textContent.replace(/\s/g,'').replace(',','.'))||0;
+  const avans=type==='zarplata'?getSavedPay('avans'):paid;
+  const zarplata=type==='zarplata'?paid:0;
+  const bokimonda=total-avans-zarplata;
+  const el=document.getElementById(type+'Result');
+  if(!el)return;
+  if(type==='avans'){
+    el.innerHTML=`💳 Аванс гирифтӣ: <b>${paid.toLocaleString()} ₽</b><br>📦 Боқимонда аз касса: <b>${Math.max(0,total-paid).toLocaleString()} ₽</b>`;
+  } else {
+    const totalPaid=avans+zarplata;
+    el.innerHTML=`💵 Карта: <b>${paid.toLocaleString()} ₽</b> + Аванс: <b>${avans.toLocaleString()} ₽</b><br>📦 Боқимонда аз касса: <b>${Math.max(0,total-totalPaid).toLocaleString()} ₽</b>`;
+  }
+  el.classList.add('show');
+}
+
+function saveAvans(){
+  const val=parseFloat(document.getElementById('avansInp').value)||0;
+  if(val<=0){toast('❌ Миқдорро ворид кунед!');return;}
+  savePay('avans',val);
+  showPayResult('avans',val);
+  toast('✅ Аванс сабт шуд!');
+}
+
+function saveZarplata(){
+  const val=parseFloat(document.getElementById('zarplataInp').value)||0;
+  if(val<=0){toast('❌ Миқдорро ворид кунед!');return;}
+  savePay('zarplata',val);
+  showPayResult('zarplata',val);
+  toast('✅ Зарплата сабт шуд!');
 }
 
 // INIT
