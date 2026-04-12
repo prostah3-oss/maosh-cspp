@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0e18">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Музди Маош — ЦСПП</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Mulish:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8102E;--green:#006633;--gold:#F0C040;--gold2:#FFD966;
+  --surf:rgba(15,20,35,0.92);--surf2:rgba(20,28,48,0.96);
+  --brd:rgba(255,255,255,0.10);--txt:#f0f0f8;--mut:rgba(240,240,248,0.42);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Mulish',sans-serif;min-height:100vh;color:var(--txt);overflow-x:hidden;background:#0a0e18;}
+
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#050d1a 0%,#0e1e3a 25%,#162b4a 40%,#1e3d2e 60%,#122018 80%,#080f0a 100%);}
+.stars{position:fixed;inset:0;z-index:0;}
+.stars::before,.stars::after{content:'';position:absolute;inset:0;background-image:
+  radial-gradient(1px 1px at 5% 5%,#fff 0%,transparent 100%),
+  radial-gradient(1px 1px at 15% 12%,rgba(255,255,255,.7) 0%,transparent 100%),
+  radial-gradient(1.5px 1.5px at 25% 8%,#fff 0%,transparent 100%),
+  radial-gradient(1px 1px at 38% 4%,rgba(255,255,255,.6) 0%,transparent 100%),
+  radial-gradient(1px 1px at 50% 9%,rgba(255,255,255,.8) 0%,transparent 100%),
+  radial-gradient(1.5px 1.5px at 63% 6%,#fff 0%,transparent 100%),
+  radial-gradient(1px 1px at 75% 3%,rgba(255,255,255,.5) 0%,transparent 100%),
+  radial-gradient(1px 1px at 88% 8%,rgba(255,255,255,.9) 0%,transparent 100%),
+  radial-gradient(1px 1px at 93% 14%,rgba(255,255,255,.4) 0%,transparent 100%),
+  radial-gradient(1px 1px at 8% 20%,rgba(255,255,255,.6) 0%,transparent 100%),
+  radial-gradient(1px 1px at 45% 16%,rgba(255,255,255,.3) 0%,transparent 100%),
+  radial-gradient(1px 1px at 72% 18%,rgba(255,255,255,.5) 0%,transparent 100%);}
+.moon{position:fixed;top:5%;right:8%;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff8dc,#ffe090,#d4a843);box-shadow:0 0 30px 12px rgba(240,192,64,.25);z-index:1;animation:mf 7s ease-in-out infinite;}
+@keyframes mf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.mtn{position:fixed;bottom:0;left:0;right:0;z-index:0;height:55%;pointer-events:none;}
+.mtn svg{width:100%;height:100%;}
+.flag{position:relative;z-index:10;display:flex;}
+.flag span{height:20px;flex:1;}
+.flag .r{background:var(--red);}
+.flag .w{background:#ffffff;}
+.flag .g{background:var(--green);}
+.app{position:relative;z-index:5;}
+.scr{display:none;flex-direction:column;min-height:calc(100vh - 6px);}
+.scr.on{display:flex;}
+
+/* ========== LOADING ========== */
+#sLoad{align-items:center;justify-content:center;}
+.ld{font-size:64px;animation:ld 1.5s ease-in-out infinite;}
+@keyframes ld{0%,100%{opacity:1}50%{opacity:.2}}
+.ld-t{font-size:13px;color:var(--mut);letter-spacing:2px;margin-top:14px;}
+
+/* ========== LANDING ========== */
+#sLand{overflow-y:auto;}
+.land-hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px 30px;text-align:center;position:relative;}
+.land-emblem{width:100px;height:100px;background:linear-gradient(135deg,rgba(200,16,46,.25),rgba(0,102,51,.25));border:2px solid rgba(240,192,64,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:50px;margin:0 auto 20px;animation:glow 3s ease-in-out infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 40px rgba(240,192,64,.2)}50%{box-shadow:0 0 70px rgba(240,192,64,.45)}}
+.land-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2),#fff8dc,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;line-height:1.2;}
+.land-sub{font-size:12px;color:var(--mut);letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;}
+.land-cards{width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+.lcard{background:rgba(15,20,35,0.7);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;text-align:left;backdrop-filter:blur(10px);}
+.lcard-ico{font-size:28px;flex-shrink:0;}
+.lcard-t{font-size:13px;font-weight:700;color:var(--gold2);margin-bottom:3px;}
+.lcard-d{font-size:11px;color:var(--mut);line-height:1.5;}
+.land-btn{width:100%;max-width:360px;padding:16px;background:linear-gradient(135deg,var(--red),#6b0010);border:none;border-radius:16px;color:#fff;font-family:'Mulish',sans-serif;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 6px 30px rgba(200,16,46,.4);letter-spacing:.5px;animation:pulse2 2s ease-in-out infinite;}
+@keyframes pulse2{0%,100%{box-shadow:0 6px 30px rgba(200,16,46,.4)}50%{box-shadow:0 6px 50px rgba(200,16,46,.6)}}
+.land-btn:active{opacity:.85;transform:scale(.98);}
+.land-note{font-size:11px;color:var(--mut);margin-top:16px;line-height:1.6;max-width:300px;}
+
+/* ========== ROLE SELECT ========== */
+#sRole{align-items:center;justify-content:center;padding:30px 20px;text-align:center;}
+.step-badge{background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);border-radius:30px;padding:5px 16px;font-size:11px;color:var(--gold2);font-weight:700;letter-spacing:1px;margin-bottom:16px;}
+.pg-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:6px;}
+.pg-sub{font-size:13px;color:var(--mut);margin-bottom:24px;line-height:1.5;}
+.role-cards{width:100%;max-width:360px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.role-card{background:var(--surf);border:2px solid var(--brd);border-radius:18px;padding:18px 16px;text-align:left;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px;}
+.role-card:active{transform:scale(.98);}
+.role-card.sel{border-color:var(--gold);background:rgba(240,192,64,.08);}
+.role-ico{font-size:30px;flex-shrink:0;}
+.role-info{}
+.role-name{font-size:15px;font-weight:700;margin-bottom:3px;}
+.role-desc{font-size:11px;color:var(--mut);line-height:1.5;}
+.role-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:5px;display:inline-block;}
+.rb-green{background:rgba(0,102,51,.2);color:#4ddd88;border:1px solid rgba(0,102,51,.3);}
+.rb-gold{background:rgba(240,192,64,.15);color:var(--gold2);border:1px solid rgba(240,192,64,.3);}
+.pin-box{background:rgba(200,16,46,.08);border:1px solid rgba(200,16,46,.25);border-radius:14px;padding:14px;width:100%;max-width:360px;margin-bottom:14px;display:none;}
+.pin-lbl{font-size:11px;color:#ff8090;margin-bottom:8px;letter-spacing:1px;text-transform:uppercase;}
+.pin-inp{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(200,16,46,.3);border-radius:10px;color:var(--txt);font-family:'Playfair Display',serif;font-size:24px;font-weight:700;padding:12px;text-align:center;outline:none;letter-spacing:8px;}
+.pin-inp:focus{border-color:var(--red);}
+
+/* ========== SHIFT SELECT ========== */
+#sShift{align-items:center;justify-content:center;padding:30px 20px;text-align:center;}
+.shift-cards{width:100%;max-width:360px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.shift-card{background:var(--surf);border:2px solid var(--brd);border-radius:18px;padding:16px;text-align:left;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px;}
+.shift-card:active{transform:scale(.98);}
+.shift-card.sel{border-color:var(--gold);background:rgba(240,192,64,.08);}
+.shift-ico{font-size:26px;flex-shrink:0;}
+.shift-info{}
+.shift-name{font-size:14px;font-weight:700;margin-bottom:2px;}
+.shift-time{font-size:12px;color:var(--gold2);font-weight:700;margin-bottom:3px;}
+.shift-desc{font-size:11px;color:var(--mut);line-height:1.4;}
+
+/* ========== REGISTER ========== */
+#sReg{align-items:center;justify-content:center;padding:30px 20px;text-align:center;}
+.reg-box{background:var(--surf2);border:1px solid var(--brd);border-radius:22px;padding:22px;width:100%;max-width:340px;}
+.flbl{font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px;text-align:left;}
+.inp{width:100%;background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:12px;color:var(--txt);font-family:'Mulish',sans-serif;font-size:15px;font-weight:600;padding:13px 16px;outline:none;transition:border-color .2s;margin-bottom:14px;}
+.inp:focus{border-color:var(--gold);}
+.rbtn{width:100%;padding:14px;background:linear-gradient(135deg,var(--red),#8b0020);border:none;border-radius:12px;color:#fff;font-family:'Mulish',sans-serif;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(200,16,46,.35);margin-top:4px;}
+.rbtn:active{opacity:.85;}
+.gbtn{width:100%;padding:13px;background:linear-gradient(135deg,var(--green),#004d26);border:none;border-radius:12px;color:#fff;font-family:'Mulish',sans-serif;font-size:14px;font-weight:900;cursor:pointer;margin-top:10px;}
+.lbtn{width:100%;padding:11px;background:transparent;border:1px solid var(--brd);border-radius:12px;color:var(--mut);font-family:'Mulish',sans-serif;font-size:13px;cursor:pointer;margin-top:8px;}
+.err{color:#ff6080;font-size:12px;margin-top:8px;display:none;text-align:center;}
+
+/* ========== LOGIN ========== */
+#sLogin{align-items:center;justify-content:center;padding:30px 20px;text-align:center;}
+
+/* ========== GREET ========== */
+#sGreet{align-items:center;justify-content:center;padding:28px 20px;text-align:center;}
+.g-logo{width:82px;height:82px;background:linear-gradient(135deg,rgba(200,16,46,.3),rgba(0,102,51,.3));border:2px solid rgba(240,192,64,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 14px;animation:glow 3s ease-in-out infinite;}
+.g-time{font-size:12px;color:var(--mut);letter-spacing:3px;text-transform:uppercase;margin-bottom:5px;}
+.g-msg{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2),#fff8dc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:3px;}
+.g-name{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:12px;}
+.g-date{background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);border-radius:30px;padding:6px 16px;font-size:12px;color:var(--gold2);margin-bottom:20px;}
+.g-card{background:var(--surf2);border:1px solid var(--brd);border-radius:20px;padding:18px;width:100%;max-width:360px;margin-bottom:12px;}
+.g-q{font-size:13px;color:var(--mut);margin-bottom:12px;line-height:1.5;}
+.g-q span{color:var(--gold2);font-weight:700;}
+.h-row{display:flex;gap:8px;align-items:center;}
+.h-inp{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--brd);border-radius:12px;color:var(--txt);font-family:'Playfair Display',serif;font-size:28px;font-weight:700;padding:11px;text-align:center;outline:none;transition:border-color .2s;}
+.h-inp:focus{border-color:var(--gold);}
+.h-inp::placeholder{font-family:'Mulish';font-size:13px;font-weight:400;color:rgba(255,255,255,.2);}
+.vxbtn{background:rgba(200,16,46,.2);border:1px solid rgba(200,16,46,.4);border-radius:12px;color:#ff7090;font-family:'Mulish',sans-serif;font-size:12px;font-weight:700;padding:12px 10px;cursor:pointer;white-space:nowrap;line-height:1.3;}
+.cbtn{width:100%;max-width:360px;padding:14px;background:linear-gradient(135deg,var(--red),#8b0020);border:none;border-radius:14px;color:#fff;font-family:'Mulish',sans-serif;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(200,16,46,.4);}
+.cbtn:active{opacity:.85;}
+.sbtn{margin-top:10px;background:transparent;border:1px solid var(--brd);border-radius:14px;color:var(--mut);font-family:'Mulish',sans-serif;font-size:13px;padding:10px;cursor:pointer;width:100%;max-width:360px;}
+
+/* ========== MAIN ========== */
+#sMain{padding-bottom:20px;}
+.ckbar{background:var(--surf);border-bottom:1px solid var(--brd);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);position:sticky;top:0;z-index:20;}
+.ck-d{font-size:11px;color:var(--mut);}
+.ck-t{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold2);}
+.ck-r{text-align:right;}
+.ck-m{font-size:10px;color:var(--mut);letter-spacing:1px;}
+.ck-y{font-size:15px;font-weight:700;}
+.ubar{background:var(--surf2);border-bottom:1px solid var(--brd);padding:7px 16px;display:flex;justify-content:space-between;align-items:center;}
+.u-l{font-size:12px;font-weight:700;color:var(--gold2);}
+.u-o{background:transparent;border:1px solid var(--brd);border-radius:8px;color:var(--mut);font-family:'Mulish',sans-serif;font-size:10px;padding:4px 10px;cursor:pointer;}
+.tabs{display:flex;background:var(--surf2);border-bottom:1px solid var(--brd);position:sticky;top:42px;z-index:19;backdrop-filter:blur(10px);}
+.tab{flex:1;padding:10px 4px;text-align:center;font-size:10px;font-weight:700;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold);}
+.tabi{font-size:14px;display:block;margin-bottom:2px;}
+.panel{display:none;padding:13px;}
+.panel.on{display:block;}
+
+/* Salary */
+.salhero{background:linear-gradient(135deg,rgba(200,16,46,.12),rgba(0,102,51,.12));border:1px solid rgba(240,192,64,.2);border-radius:18px;padding:18px;text-align:center;margin-bottom:12px;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+.salhero::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:200px;height:150px;background:radial-gradient(ellipse,rgba(240,192,64,.07) 0%,transparent 70%);pointer-events:none;}
+.sal-lbl{font-size:10px;color:var(--mut);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:3px;}
+.sal-amt{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--gold2);line-height:1;text-shadow:0 0 30px rgba(240,192,64,.4);}
+.sal-sym{font-size:12px;color:var(--mut);margin-top:3px;}
+.dv{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:10px auto;}
+.mst{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.ms{text-align:center;}
+.msn{font-size:16px;font-weight:900;}
+.msl{font-size:9px;color:var(--mut);}
+.info-badge{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;margin-bottom:10px;}
+.ib-blue{background:rgba(100,150,255,.1);border:1px solid rgba(100,150,255,.25);color:#88aaff;}
+.ib-gold{background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);color:var(--gold2);}
+.ib-red{background:rgba(200,16,46,.1);border:1px solid rgba(200,16,46,.25);color:#ff8090;}
+.fbar{background:var(--surf);border:1px solid var(--brd);border-radius:13px;padding:11px 13px;margin-bottom:12px;backdrop-filter:blur(10px);}
+.fbt{display:flex;justify-content:space-between;margin-bottom:7px;}
+.fbl{font-size:11px;color:var(--mut);}
+.fbv{font-size:12px;font-weight:700;color:var(--gold2);}
+.ptrk{background:rgba(255,255,255,.08);border-radius:10px;height:7px;overflow:hidden;}
+.pfil{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--green),var(--gold));transition:width .5s;}
+.ftrs{display:flex;justify-content:space-between;margin-top:5px;}
+.tier{font-size:9px;color:var(--mut);text-align:center;}
+.tier.on{color:var(--gold2);font-weight:700;}
+.brkd{background:var(--surf);border:1px solid var(--brd);border-radius:13px;overflow:hidden;backdrop-filter:blur(10px);margin-bottom:12px;}
+.br{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;border-bottom:1px solid var(--brd);}
+.br:last-child{border-bottom:none;}
+.brl{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--mut);}
+.brv{font-size:12px;font-weight:700;}
+.brt{background:rgba(240,192,64,.04);}
+.secttl{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin:14px 0 8px;display:flex;align-items:center;gap:8px;}
+.secttl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(240,192,64,.3),transparent);}
+.adbtn{width:100%;padding:13px;background:rgba(200,16,46,.15);border:1px solid rgba(200,16,46,.35);border-radius:13px;color:#ff8090;font-family:'Mulish',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;}
+.adbtn:active{opacity:.75;}
+
+/* Profile panel */
+.prof-card{background:var(--surf);border:1px solid var(--brd);border-radius:16px;overflow:hidden;backdrop-filter:blur(10px);margin-bottom:12px;}
+.prow{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--brd);}
+.prow:last-child{border-bottom:none;}
+.plbl{font-size:12px;color:var(--mut);}
+.pval{font-size:13px;font-weight:700;color:var(--txt);}
+.change-btn{background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.3);border-radius:8px;color:var(--gold2);font-family:'Mulish',sans-serif;font-size:11px;font-weight:700;padding:5px 10px;cursor:pointer;}
+
+/* Extra pay input */
+.extra-card{background:var(--surf);border:1px solid var(--brd);border-radius:13px;padding:12px 14px;margin-bottom:12px;backdrop-filter:blur(10px);}
+.extra-title{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.extra-row{display:flex;gap:8px;align-items:center;}
+.extra-inp{flex:1;background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:10px;color:var(--txt);font-family:'Playfair Display',serif;font-size:18px;font-weight:700;padding:9px 12px;outline:none;text-align:center;}
+.extra-inp:focus{border-color:var(--gold);}
+.extra-btn{background:linear-gradient(135deg,var(--green),#004d26);border:none;border-radius:10px;color:#fff;font-family:'Mulish',sans-serif;font-size:12px;font-weight:700;padding:9px 14px;cursor:pointer;white-space:nowrap;}
+
+/* Calendar */
+.calw{background:var(--surf);border:1px solid var(--brd);border-radius:14px;overflow:hidden;backdrop-filter:blur(10px);}
+.crow{display:grid;grid-template-columns:34px 1fr auto auto;gap:5px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--brd);}
+.crow:last-child{border-bottom:none;}
+.crow.fut{opacity:.28;pointer-events:none;}
+.crow.tod{background:rgba(240,192,64,.05);border-left:2px solid var(--gold);}
+.crow.hase{background:rgba(0,102,51,.05);}
+.crow.vxr{background:rgba(200,16,46,.05);}
+.cdn{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--gold);text-align:center;}
+.cdn.tc{color:var(--gold2);}
+.cdn.fc{color:rgba(240,240,248,.2);}
+.cdn2{font-size:9px;color:var(--mut);}
+.cst{font-size:11px;font-weight:700;margin-top:1px;}
+.cst.ok{color:#4ddd88;}
+.cst.vx{color:#ff8090;}
+.cst.no{color:rgba(240,240,248,.25);}
+.csub{font-size:9px;}
+.csub.gn{color:rgba(77,221,136,.6);}
+.csub.gy{color:var(--mut);}
+.cinp{background:rgba(255,255,255,.08);border:1px solid var(--brd);border-radius:8px;color:var(--txt);font-family:'Playfair Display',serif;font-size:14px;font-weight:700;padding:5px 5px;width:48px;text-align:center;outline:none;}
+.cinp:focus{border-color:var(--gold);}
+.cacts{display:flex;gap:3px;}
+.cb{border-radius:7px;font-family:'Mulish',sans-serif;font-size:10px;font-weight:700;padding:5px 6px;cursor:pointer;border:1px solid;}
+.cb:active{opacity:.6;}
+.cbs{background:rgba(0,102,51,.2);border-color:rgba(0,102,51,.5);color:#4ddd88;}
+.cbv{background:rgba(200,16,46,.15);border-color:rgba(200,16,46,.4);color:#ff8090;}
+.cbe{background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.35);color:var(--gold2);}
+.cbd{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:var(--mut);}
+
+/* ADMIN */
+#sAdmin{padding-bottom:20px;}
+.topbar{background:var(--surf);border-bottom:1px solid var(--brd);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);position:sticky;top:0;z-index:20;}
+.tbt{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold2);}
+.admbdg{background:rgba(200,16,46,.2);border:1px solid rgba(200,16,46,.4);color:#ff8090;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;}
+.obtn{background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:10px;color:var(--mut);font-family:'Mulish',sans-serif;font-size:11px;padding:6px 12px;cursor:pointer;}
+.abody{padding:14px;max-width:480px;margin:0 auto;}
+.card{background:var(--surf);border:1px solid var(--brd);border-radius:16px;overflow:hidden;backdrop-filter:blur(10px);margin-bottom:12px;}
+.cp{padding:16px;}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--brd);}
+.srow:last-child{border-bottom:none;}
+.slbl{font-size:12px;color:var(--mut);}
+.sinp{background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:9px;color:var(--txt);font-family:'Mulish',sans-serif;font-size:14px;font-weight:700;padding:6px 10px;width:100px;text-align:right;outline:none;}
+.sinp:focus{border-color:var(--gold);}
+.wrow{display:flex;align-items:center;gap:10px;padding:11px 13px;border-bottom:1px solid var(--brd);}
+.wrow:last-child{border-bottom:none;}
+.wava{width:36px;height:36px;border-radius:10px;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.winfo{flex:1;}
+.wname{font-size:13px;font-weight:700;}
+.wdet{font-size:10px;color:var(--mut);margin-top:1px;}
+.wbdg{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;background:rgba(0,102,51,.2);color:#4ddd88;border:1px solid rgba(0,102,51,.3);}
+.wdel{background:transparent;border:1px solid rgba(200,16,46,.3);border-radius:7px;color:rgba(200,16,46,.6);width:28px;height:28px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.empt{text-align:center;padding:22px;color:var(--mut);font-size:13px;}
+
+/* Bottom nav */
+.botnav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:var(--surf2);border-top:1px solid var(--brd);backdrop-filter:blur(12px);}
+.bnrow{display:flex;max-width:480px;margin:0 auto;}
+.bn{flex:1;padding:10px 4px 9px;text-align:center;font-size:10px;font-weight:700;color:var(--mut);cursor:pointer;border:none;background:transparent;font-family:'Mulish',sans-serif;transition:color .2s;letter-spacing:.5px;text-transform:uppercase;}
+.bn.on{color:var(--gold);}
+.bni{font-size:17px;display:block;margin-bottom:1px;}
+.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--surf2);border:1px solid var(--gold);color:var(--gold2);padding:10px 20px;border-radius:30px;font-size:13px;font-weight:700;transition:transform .35s cubic-bezier(.34,1.56,.64,1);z-index:999;white-space:nowrap;backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(0,0,0,.5);}
+.toast.on{transform:translateX(-50%) translateY(0);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:rgba(240,192,64,.2);border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="stars"></div>
+<div class="moon" id="moonEl"></div>
+<div class="mtn">
+<svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="0,200 30,100 70,150 110,60 160,120 200,50 250,110 290,30 340,90 380,60 400,80 400,240 0,240" fill="rgba(20,45,30,0.55)"/>
+  <polygon points="110,60 98,90 122,90" fill="rgba(230,240,235,0.6)"/>
+  <polygon points="290,30 276,62 304,62" fill="rgba(230,240,235,0.6)"/>
+  <polygon points="200,50 188,78 212,78" fill="rgba(230,240,235,0.45)"/>
+  <polygon points="0,240 0,170 50,110 100,160 160,95 220,150 280,85 340,135 400,105 400,240" fill="rgba(8,20,12,0.88)"/>
+  <rect x="0" y="215" width="400" height="25" fill="rgba(5,14,8,0.97)"/>
+  <polygon points="15,215 20,195 25,215" fill="rgba(3,10,5,0.9)"/>
+  <polygon points="40,215 46,188 52,215" fill="rgba(3,10,5,0.9)"/>
+  <polygon points="330,215 336,192 342,215" fill="rgba(3,10,5,0.9)"/>
+  <polygon points="360,215 366,197 372,215" fill="rgba(3,10,5,0.9)"/>
+  <ellipse cx="200" cy="228" rx="80" ry="5" fill="rgba(240,192,64,0.06)"/>
+</svg>
+</div>
+<div class="flag"><span class="r"></span><span class="w"></span><span class="g"></span></div>
+<div class="app">
+
+<!-- LOADING -->
+<div class="scr on" id="sLoad">
+  <div class="ld">🇹🇯</div>
+  <div class="ld-t">Бор мешавад...</div>
+</div>
+
+<!-- LANDING -->
+<div class="scr" id="sLand">
+  <div class="land-hero">
+    <div class="land-emblem">💰</div>
+    <div class="land-title">Музди Маош</div>
+    <div class="land-sub">🏭 ЦСПП — Системаи ҳисоби маош</div>
+
+    <div class="land-cards">
+      <div class="lcard">
+        <div class="lcard-ico">📊</div>
+        <div>
+          <div class="lcard-t">Ҳисоби автоматӣ</div>
+          <div class="lcard-d">Маоши соатӣ, премия, пули питания ва пули обед — ҳама автоматӣ ҳисоб мешавад</div>
+        </div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-ico">🗓️</div>
+        <div>
+          <div class="lcard-t">Тақвими рӯзона</div>
+          <div class="lcard-d">Ҳар рӯз соатҳои кориро ворид кунед — ҷамъ нишон дода мешавад</div>
+        </div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-ico">💾</div>
+        <div>
+          <div class="lcard-t">Маълумот нигоҳ мемонад</div>
+          <div class="lcard-d">Ҳамаи маълумот дар сервер нигоҳ дошта мешавад — аз ҳар телефон дастрас</div>
+        </div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-ico">🇹🇯</div>
+        <div>
+          <div class="lcard-t">Барои кормандони ЦСПП</div>
+          <div class="lcard-d">Барномаи махсус барои кормандони корхонаи мо</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="land-btn" onclick="show('sRole')">🚀 Оғоз кардан</button>
+    <div class="land-note">Агар аллакай бақайдгирӣ кардед — <span style="color:var(--gold2);cursor:pointer;font-weight:700" onclick="show('sLogin')">Дохил шавед</span></div>
+  </div>
+</div>
+
+<!-- ROLE SELECT -->
+<div class="scr" id="sRole">
+  <div style="padding:28px 20px;text-align:center;width:100%;max-width:420px;margin:0 auto;align-self:center;">
+    <div class="step-badge">Қадами 1 аз 3</div>
+    <div class="pg-title">Вазифаи худро интихоб кунед</div>
+    <div class="pg-sub">Ин барои ҳисоби дурусти маош лозим аст</div>
+
+    <div class="role-cards">
+      <div class="role-card" id="rc1" onclick="selRole('worker')">
+        <div class="role-ico">👷</div>
+        <div class="role-info">
+          <div class="role-name">Коргари оддӣ</div>
+          <div class="role-desc">Маоши соатӣ + пули обед + пули питания. Иловапули вақте мавҷуд бошад дохил карда мешавад.</div>
+          <div class="role-badge rb-green">Бе рамз</div>
+        </div>
+      </div>
+      <div class="role-card" id="rc2" onclick="selRole('karchik')">
+        <div class="role-ico">🏋️</div>
+        <div class="role-info">
+          <div class="role-name">Каршик (Погрузчик)</div>
+          <div class="role-desc">Маоши соатӣ + пули обед + пули питания + премияи Каршик 6000₽/моҳ автоматӣ.</div>
+          <div class="role-badge rb-gold">Рамз лозим</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pin-box" id="pinBox">
+      <div class="pin-lbl">🔐 Рамзи Каршикро ворид кунед</div>
+      <input class="pin-inp" type="password" id="pinInp" maxlength="4" placeholder="••••" inputmode="numeric">
+      <div class="err" id="pinErr">❌ Рамз нодуруст!</div>
+    </div>
+
+    <button class="rbtn" style="max-width:360px;width:100%;margin-top:8px" onclick="nextToShift()">Идома додан ←</button>
+    <button class="lbtn" style="max-width:360px" onclick="show('sLand')">← Бозгашт</button>
+  </div>
+</div>
+
+<!-- SHIFT SELECT -->
+<div class="scr" id="sShift">
+  <div style="padding:28px 20px;text-align:center;width:100%;max-width:420px;margin:0 auto;align-self:center;">
+    <div class="step-badge">Қадами 2 аз 3</div>
+    <div class="pg-title">Сменаи кориро интихоб кунед</div>
+    <div class="pg-sub">Дар кадом смена кор мекунед?</div>
+
+    <div class="shift-cards">
+      <div class="shift-card" id="sc1" onclick="selShift(1)">
+        <div class="shift-ico">🌅</div>
+        <div class="shift-info">
+          <div class="shift-name">1-юм смена</div>
+          <div class="shift-time">08:00 — 01:00</div>
+          <div class="shift-desc">Иловапули вақте мавҷуд бошад дохил карда мешавад</div>
+        </div>
+      </div>
+      <div class="shift-card" id="sc2" onclick="selShift(2)">
+        <div class="shift-ico">🌆</div>
+        <div class="shift-info">
+          <div class="shift-name">2-юм смена</div>
+          <div class="shift-time">17:00 — 08:00</div>
+          <div class="shift-desc">Премия 2000₽/моҳ автоматӣ + иловапули дастӣ</div>
+        </div>
+      </div>
+      <div class="shift-card" id="sc3" onclick="selShift(3)">
+        <div class="shift-ico">🌙</div>
+        <div class="shift-info">
+          <div class="shift-name">3-юм смена</div>
+          <div class="shift-time">01:00 — 17:00</div>
+          <div class="shift-desc">Премия 3000₽/моҳ автоматӣ + иловапули дастӣ</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="rbtn" style="max-width:360px;width:100%;margin-top:8px" onclick="nextToReg()">Идома додан →</button>
+    <button class="lbtn" style="max-width:360px" onclick="show('sRole')">← Бозгашт</button>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="scr" id="sReg">
+  <div style="padding:28px 20px;text-align:center;width:100%;max-width:420px;margin:0 auto;align-self:center;">
+    <div class="step-badge">Қадами 3 аз 3</div>
+    <div class="pg-title">Бақайдгирӣ</div>
+    <div class="pg-sub">Маълумоти худро ворид кунед</div>
+    <div class="reg-box">
+      <div class="flbl">Номи пурра</div>
+      <input class="inp" type="text" id="rName" placeholder="Мисол: Алишер Раҳимов" autocapitalize="words">
+      <div class="flbl">Логин</div>
+      <input class="inp" type="text" id="rLogin" placeholder="Мисол: alisher_01" autocapitalize="off" autocomplete="off">
+      <button class="rbtn" onclick="doRegister()">✅ Бақайдгирӣ</button>
+      <div class="err" id="rErr">❌ Ин логин аллакай гирифта шудааст!</div>
+    </div>
+    <button class="lbtn" style="max-width:340px" onclick="show('sShift')">← Бозгашт</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="scr" id="sLogin">
+  <div style="padding:30px 20px;text-align:center;width:100%;max-width:420px;margin:auto;align-self:center;">
+    <div class="g-logo">🇹🇯</div>
+    <div class="pg-title" style="margin-bottom:4px">Дохил шавед</div>
+    <div class="pg-sub">Логини худро ворид кунед</div>
+    <div class="reg-box">
+      <div class="flbl">Логин</div>
+      <input class="inp" type="text" id="lUser" placeholder="логинатонро ворид кунед" autocapitalize="off" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="rbtn" onclick="doLogin()">🔐 Дохил шавед</button>
+      <div class="err" id="lErr">❌ Логин нодуруст!</div>
+    </div>
+    <button class="lbtn" style="max-width:340px;margin-top:8px" onclick="show('sLand')">← Бозгашт</button>
+  </div>
+</div>
+
+<!-- GREET -->
+<div class="scr" id="sGreet">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;text-align:center;min-height:calc(100vh - 6px)">
+    <div class="g-logo">🇹🇯</div>
+    <div class="g-time" id="gTime">—</div>
+    <div class="g-msg" id="gMsg">Рӯз ба Хайр,</div>
+    <div class="g-name" id="gName">—</div>
+    <div class="g-date" id="gDate">—</div>
+    <div class="g-card">
+      <div class="g-q" id="gQ">Имрӯз <span id="gDS">—</span>, чанд соат кор кардӣ?</div>
+      <div class="h-row">
+        <input class="h-inp" type="number" id="gH" placeholder="0–15" min="0" max="15" step="0.5">
+        <button class="vxbtn" onclick="greetVx()">🏠<br>Входной</button>
+      </div>
+    </div>
+    <button class="cbtn" onclick="greetSave()">✅ Тасдиқ кардан</button>
+    <button class="sbtn" onclick="goMain()">📊 Ба барнома даромадан</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="scr" id="sMain">
+  <div class="ckbar">
+    <div><div class="ck-d" id="mDate">—</div><div class="ck-t" id="mTime">—</div></div>
+    <div class="ck-r"><div class="ck-m" id="mMonth">—</div><div class="ck-y" id="mYear">—</div></div>
+  </div>
+  <div class="ubar">
+    <span class="u-l" id="uLbl">—</span>
+    <button class="u-o" onclick="doLogout()">Баромадан 🚪</button>
+  </div>
+  <div class="tabs">
+    <div class="tab on" onclick="swTab(0)"><span class="tabi">💰</span>Маош</div>
+    <div class="tab" onclick="swTab(1)"><span class="tabi">🗓️</span>Тақвим</div>
+    <div class="tab" onclick="swTab(2)"><span class="tabi">👤</span>Профил</div>
+  </div>
+
+  <!-- SALARY PANEL -->
+  <div class="panel on" id="p0">
+    <div id="infoBadge" class="info-badge ib-gold" style="display:none">🌙 3-юм смена</div>
+    <div class="salhero">
+      <div class="sal-lbl">Маош то имрӯз</div>
+      <div class="sal-amt" id="sTotal">0</div>
+      <div class="sal-sym">₽ Рубли Русия</div>
+      <div class="dv"></div>
+      <div class="mst">
+        <div class="ms"><div class="msn" id="sHours">0</div><div class="msl">Соат</div></div>
+        <div class="ms"><div class="msn" id="sDays">0</div><div class="msl">Рӯзи кор</div></div>
+        <div class="ms"><div class="msn" id="sToday">0</div><div class="msl">Имрӯз ₽</div></div>
+      </div>
+    </div>
+    <div class="fbar">
+      <div class="fbt"><span class="fbl">🥗 Пули питания</span><span class="fbv" id="fAmt">0 ₽</span></div>
+      <div class="ptrk"><div class="pfil" id="fBar" style="width:0%"></div></div>
+      <div class="ftrs">
+        <div class="tier" id="ti0">390с<br><span id="tf0">3500₽</span></div>
+        <div class="tier" id="ti1">421с<br><span id="tf1">4000₽</span></div>
+        <div class="tier" id="ti2">450с<br><span id="tf2">4500₽</span></div>
+        <div class="tier" id="ti3">465с<br><span id="tf3">5000₽</span></div>
+      </div>
+    </div>
+
+    <!-- Extra pay -->
+    <div class="extra-card" id="extraCard">
+      <div class="extra-title">➕ Иловапули / Премия дохил кунед</div>
+      <div class="extra-row">
+        <input class="extra-inp" type="number" id="extraInp" placeholder="0 ₽" min="0">
+        <button class="extra-btn" onclick="saveExtra()">💾 Сабт</button>
+      </div>
+    </div>
+
+    <div class="secttl">💰 Тафсили маош</div>
+    <div class="brkd">
+      <div class="br"><div class="brl"><span>⏱️</span><span id="lHr">Маоши соатӣ</span></div><span class="brv" id="bHr">0 ₽</span></div>
+      <div class="br"><div class="brl"><span>🍽️</span><span id="lLn">Пули обед</span></div><span class="brv" id="bLn">0 ₽</span></div>
+      <div class="br" id="brKar"><div class="brl"><span>⭐</span><span id="lKr">Премия Каршик</span></div><span class="brv" id="bKr">0 ₽</span></div>
+      <div class="br" id="brSme"><div class="brl"><span>🌙</span><span id="lSm">Премия смена</span></div><span class="brv" id="bSm">0 ₽</span></div>
+      <div class="br"><div class="brl"><span>🥗</span>Пули питания</div><span class="brv" id="bFd">0 ₽</span></div>
+      <div class="br" id="brEx"><div class="brl"><span>💎</span>Иловапули</div><span class="brv" id="bEx">0 ₽</span></div>
+      <div class="br brt"><div class="brl" style="color:var(--gold2);font-weight:700"><span>💵</span>ҶАМЪ</div><span class="brv" style="color:var(--gold2);font-size:14px" id="bTl">0 ₽</span></div>
+    </div>
+    <button class="adbtn" onclick="goGreet()">➕ Рӯзи нав илова кардан</button>
+  </div>
+
+  <!-- CALENDAR PANEL -->
+  <div class="panel" id="p1">
+    <div class="secttl">🗓️ Тақвими моҳ</div>
+    <div class="calw" id="calTable"></div>
+  </div>
+
+  <!-- PROFILE PANEL -->
+  <div class="panel" id="p2">
+    <div class="secttl">👤 Профили ман</div>
+    <div class="prof-card">
+      <div class="prow"><span class="plbl">Ном</span><span class="pval" id="profName">—</span></div>
+      <div class="prow"><span class="plbl">Логин</span><span class="pval" id="profLogin">—</span></div>
+    </div>
+
+    <div class="secttl">👷 Вазифа</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <div class="role-toggle" id="rt1" onclick="toggleRole('worker')" style="flex:1;background:var(--surf);border:2px solid var(--brd);border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;">
+        <div style="font-size:22px;margin-bottom:4px">👷</div>
+        <div style="font-size:12px;font-weight:700">Коргари оддӣ</div>
+      </div>
+      <div class="role-toggle" id="rt2" onclick="toggleRole('karchik')" style="flex:1;background:var(--surf);border:2px solid var(--brd);border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;">
+        <div style="font-size:22px;margin-bottom:4px">🏋️</div>
+        <div style="font-size:12px;font-weight:700">Каршик</div>
+        <div style="font-size:10px;color:var(--mut);margin-top:2px">Рамз лозим</div>
+      </div>
+    </div>
+    <div id="pinBox2" style="background:rgba(200,16,46,.08);border:1px solid rgba(200,16,46,.25);border-radius:12px;padding:12px;margin-bottom:12px;display:none">
+      <div style="font-size:11px;color:#ff8090;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">🔐 Рамзи Каршик</div>
+      <input id="pinInp2" type="password" maxlength="4" placeholder="••••" inputmode="numeric" style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(200,16,46,.3);border-radius:10px;color:var(--txt);font-family:Playfair Display,serif;font-size:24px;font-weight:700;padding:10px;text-align:center;outline:none;letter-spacing:8px;">
+      <button onclick="confirmKarchik()" style="width:100%;padding:11px;background:linear-gradient(135deg,var(--red),#8b0020);border:none;border-radius:10px;color:#fff;font-family:Mulish,sans-serif;font-size:13px;font-weight:900;cursor:pointer;margin-top:8px">✅ Тасдиқ</button>
+      <div id="pinErr2" style="color:#ff6080;font-size:12px;margin-top:6px;display:none;text-align:center">❌ Рамз нодуруст!</div>
+    </div>
+
+    <div class="secttl">🌙 Смена</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+      <div class="shift-toggle" id="st1" onclick="toggleShift(1)" style="background:var(--surf);border:2px solid var(--brd);border-radius:14px;padding:12px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:20px">🌅</span>
+        <div><div style="font-size:13px;font-weight:700">1-юм смена</div><div style="font-size:11px;color:var(--mut)">08:00 — 01:00 · Иловапули дастӣ</div></div>
+      </div>
+      <div class="shift-toggle" id="st2" onclick="toggleShift(2)" style="background:var(--surf);border:2px solid var(--brd);border-radius:14px;padding:12px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:20px">🌆</span>
+        <div><div style="font-size:13px;font-weight:700">2-юм смена</div><div style="font-size:11px;color:var(--mut)">17:00 — 08:00 · 2000₽/моҳ + иловапули</div></div>
+      </div>
+      <div class="shift-toggle" id="st3" onclick="toggleShift(3)" style="background:var(--surf);border:2px solid var(--brd);border-radius:14px;padding:12px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:20px">🌙</span>
+        <div><div style="font-size:13px;font-weight:700">3-юм смена</div><div style="font-size:11px;color:var(--mut)">01:00 — 17:00 · 3000₽/моҳ + иловапули</div></div>
+      </div>
+    </div>
+
+    <button class="rbtn" onclick="doLogout()" style="margin-top:4px">🚪 Баромадан</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="scr" id="sAdmin">
+  <div class="topbar">
+    <div class="tbt">👑 Панели Админ</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="admbdg">ADMIN</span>
+      <button class="obtn" onclick="doLogout()">Баромадан</button>
+    </div>
+  </div>
+  <div class="abody">
+    <div class="secttl">👷 Кормандон</div>
+    <div class="card" id="wList"><div class="empt">Юкланмоқда...</div></div>
+    <div class="secttl">⚙️ Танзимоти маош</div>
+    <div class="card">
+      <div class="srow"><span class="slbl">Нархи соат (₽)</span><input class="sinp" type="number" id="sRate" value="240"></div>
+      <div class="srow"><span class="slbl">Пули обед (₽/рӯз)</span><input class="sinp" type="number" id="sLunch" value="130"></div>
+      <div class="srow"><span class="slbl">Премия Каршик (₽/моҳ)</span><input class="sinp" type="number" id="sKar" value="6000"></div>
+      <div class="srow"><span class="slbl">Премия 2-смена (₽/моҳ)</span><input class="sinp" type="number" id="sSme2" value="2000"></div>
+      <div class="srow"><span class="slbl">Премия 3-смена (₽/моҳ)</span><input class="sinp" type="number" id="sSme3" value="3000"></div>
+      <div class="srow"><span class="slbl">Питание ≥390 соат (₽)</span><input class="sinp" type="number" id="sF1" value="3500"></div>
+      <div class="srow"><span class="slbl">Питание ≥421 соат (₽)</span><input class="sinp" type="number" id="sF2" value="4000"></div>
+      <div class="srow"><span class="slbl">Питание ≥450 соат (₽)</span><input class="sinp" type="number" id="sF3" value="4500"></div>
+      <div class="srow"><span class="slbl">Питание ≥465 соат (₽)</span><input class="sinp" type="number" id="sF4" value="5000"></div>
+    </div>
+    <button class="gbtn" onclick="saveST()">💾 Сабт кардан</button>
+  </div>
+</div>
+
+</div><!-- app -->
+
+<!-- bottom nav removed -->
+<div class="toast" id="toast"></div>
+
+<script>
+const SB='https://ldfrpmxieijdrswhuzmk.supabase.co';
+const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnJwbXhpZWlqZHJzd2h1em1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MTI4NDIsImV4cCI6MjA5MTM4ODg0Mn0.Zn8LPJ5V2sKAAD4i7gbY4DKyauhw1ycPpndk26COjhM';
+const SH={'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK};
+const AL='цспп_admin';
+const KPIN='2211';
+const MTG=['','Январ','Феврал','Март','Апрел','Май','Июн','Июл','Август','Сентябр','Октябр','Ноябр','Декабр'];
+const DTG=['Якшанбе','Душанбе','Сешанбе','Чоршанбе','Панҷшанбе','Ҷумъа','Шанбе'];
+const DSH=['Яш','Дш','Сш','Чш','Пш','Ҷм','Шб'];
+const MD=30;
+
+async function db(path,method='GET',body=null,extra={}){
+  const h={...SH,'Prefer':'return=representation',...extra};
+  const o={method,headers:h};
+  if(body)o.body=JSON.stringify(body);
+  try{
+    const r=await fetch(SB+'/rest/v1/'+path,o);
+    const t=await r.text();
+    if(!r.ok){console.error('DB Error:',r.status,t);throw new Error(r.status+': '+t.substring(0,100));}
+    return t?JSON.parse(t):[];
+  }catch(e){
+    console.error('Fetch error:',e);
+    throw e;
+  }
+}
+const G=(t,q='')=>db(t+(q?'?'+q:''));
+const U=(t,q,d)=>db(t+'?'+q,'PATCH',d);
+const D=(t,q)=>db(t+'?'+q,'DELETE');
+const UP=(t,d,oc)=>db(t,'POST',d,{'Prefer':'resolution=merge-duplicates,return=representation','on-conflict':oc});
+
+let CU=null;
+let ST={rate:240,lunch:130,kar:6000,sme2:2000,sme3:3000,f1:3500,f2:4000,f3:4500,f4:5000};
+let EN=[];
+let selR=null,selS=null,gV=false;
+
+// SCREENS
+const SCRS=['sLoad','sLand','sRole','sShift','sReg','sLogin','sGreet','sMain','sAdmin'];
+function show(id){
+  SCRS.forEach(s=>document.getElementById(s).classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  // bnav removed
+  const h=new Date().getHours();
+  document.getElementById('moonEl').style.display=(h>=6&&h<20)?'none':'block';
+}
+
+// ROLE
+function selRole(r){
+  selR=r;
+  document.getElementById('rc1').classList.toggle('sel',r==='worker');
+  document.getElementById('rc2').classList.toggle('sel',r==='karchik');
+  document.getElementById('pinBox').style.display=r==='karchik'?'block':'none';
+}
+function nextToShift(){
+  if(!selR){toast('❌ Вазифаро интихоб кунед!');return;}
+  if(selR==='karchik'){
+    const pin=document.getElementById('pinInp').value;
+    if(pin!==KPIN){document.getElementById('pinErr').style.display='block';return;}
+    document.getElementById('pinErr').style.display='none';
+  }
+  show('sShift');
+}
+
+// SHIFT
+function selShift(s){
+  selS=s;
+  [1,2,3].forEach(i=>document.getElementById('sc'+i).classList.toggle('sel',i===s));
+}
+function nextToReg(){
+  if(!selS){toast('❌ Сменаро интихоб кунед!');return;}
+  show('sReg');
+}
+
+// REGISTER
+async function doRegister(){
+  const name=document.getElementById('rName').value.trim();
+  const login=document.getElementById('rLogin').value.trim().toLowerCase().replace(/\s+/g,'_');
+  document.getElementById('rErr').style.display='none';
+  if(!name||name.length<2){toast('❌ Номатонро ворид кунед!');return;}
+  if(!login||login.length<2){toast('❌ Логинро ворид кунед!');return;}
+  if(!selR){toast('❌ Вазифаро интихоб кунед!');return;}
+  if(!selS){toast('❌ Сменаро интихоб кунед!');return;}
+  if(login===AL){toast('❌ Ин логин банд аст!');return;}
+  toast('⏳ Сабт мешавад...');
+  try{
+    const res=await fetch(SB+'/rest/v1/workers',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':SK,
+        'Authorization':'Bearer '+SK,
+        'Prefer':'return=representation'
+      },
+      body:JSON.stringify({login,name,role:selR,shift:selS})
+    });
+    const txt=await res.text();
+    console.log('Register response:',res.status,txt);
+    if(!res.ok){
+      if(res.status===409||txt.includes('duplicate')||txt.includes('unique')){
+        document.getElementById('rErr').style.display='block';
+        toast('❌ Ин логин аллакай мавҷуд аст!');return;
+      }
+      toast('❌ Хато '+res.status+': '+txt.substring(0,60));return;
+    }
+    CU={login,name:name,role:selR,shift:selS};
+    localStorage.setItem('cu',JSON.stringify(CU));
+    EN=[];
+    toast('✅ Бақайдгирӣ муваффақ!');
+    setTimeout(()=>{show('sGreet');setupGreet();},700);
+  }catch(e){
+    console.error('Register error:',e);
+    toast('❌ '+(e.message||'Хато').substring(0,60));
+  }
+}
+
+// LOGIN
+async function doLogin(){
+  const l=document.getElementById('lUser').value.trim().toLowerCase();
+  document.getElementById('lErr').style.display='none';
+  if(!l){document.getElementById('lErr').style.display='block';return;}
+  if(l===AL){
+    CU={login:AL,name:'Ҳомидҷон',role:'admin',shift:3};
+    localStorage.setItem('cu',JSON.stringify(CU));
+    await showAdmin();return;
+  }
+  try{
+    const w=await G('workers',`login=eq.${encodeURIComponent(l)}`);
+    if(!w.length){document.getElementById('lErr').style.display='block';return;}
+    CU={login:w[0].login,name:w[0].name||w[0].login,role:w[0].role||'worker',shift:w[0].shift||3};
+    localStorage.setItem('cu',JSON.stringify(CU));
+    await loadEN();
+    const today=new Date().getDate();
+    const te=EN.find(e=>e.day===today);
+    if(!te){show('sGreet');setupGreet();}else{goMain();}
+  }catch(e){toast('❌ Хато: '+(e.message||'Интернет нест!').substring(0,50));}
+}
+
+function doLogout(){
+  CU=null;localStorage.removeItem('cu');clearInterval(CI);show('sLand');
+}
+
+// CHANGE ROLE/SHIFT
+function changeRole(){
+  selR=CU.role;selS=CU.shift;
+  show('sRole');
+  document.getElementById('rc1').classList.toggle('sel',selR==='worker');
+  document.getElementById('rc2').classList.toggle('sel',selR==='karchik');
+  document.getElementById('pinBox').style.display=selR==='karchik'?'block':'none';
+}
+function changeShift(){
+  selR=CU.role;selS=CU.shift;
+  show('sShift');
+  [1,2,3].forEach(i=>document.getElementById('sc'+i).classList.toggle('sel',i===selS));
+}
+// After changing role/shift, update in DB and re-register
+const origNextToShift=nextToShift;
+
+// ADMIN
+async function showAdmin(){
+  show('sAdmin');
+  await Promise.all([loadST(),renderWorkers()]);
+}
+async function loadST(){
+  try{
+    const rows=await G('settings');
+    rows.forEach(r=>{if(ST.hasOwnProperty(r.key))ST[r.key]=parseFloat(r.value)||ST[r.key];});
+    loadSTUI();
+  }catch(e){}
+}
+function loadSTUI(){
+  document.getElementById('sRate').value=ST.rate;
+  document.getElementById('sLunch').value=ST.lunch;
+  document.getElementById('sKar').value=ST.kar;
+  document.getElementById('sSme2').value=ST.sme2;
+  document.getElementById('sSme3').value=ST.sme3;
+  document.getElementById('sF1').value=ST.f1;
+  document.getElementById('sF2').value=ST.f2;
+  document.getElementById('sF3').value=ST.f3;
+  document.getElementById('sF4').value=ST.f4;
+}
+async function saveST(){
+  ST={rate:+document.getElementById('sRate').value||240,lunch:+document.getElementById('sLunch').value||130,kar:+document.getElementById('sKar').value||6000,sme2:+document.getElementById('sSme2').value||2000,sme3:+document.getElementById('sSme3').value||3000,f1:+document.getElementById('sF1').value||3500,f2:+document.getElementById('sF2').value||4000,f3:+document.getElementById('sF3').value||4500,f4:+document.getElementById('sF4').value||5000};
+  try{
+    await UP('settings',Object.keys(ST).map(k=>({key:k,value:String(ST[k])})),'key');
+    toast('✅ Танзимот сабт шуд!');
+  }catch(e){toast('❌ Хато!');}
+}
+async function renderWorkers(){
+  const el=document.getElementById('wList');
+  try{
+    const w=await G('workers','order=created_at.asc');
+    if(!w.length){el.innerHTML='<div class="empt">Корманд нест</div>';return;}
+    const roleN=r=>r==='karchik'?'🏋️ Каршик':'👷 Коргар';
+    const shiftN=s=>s===1?'1-смена':s===2?'2-смена':'3-смена';
+    el.innerHTML=w.map(x=>`<div class="wrow"><div class="wava">${x.role==='karchik'?'🏋️':'👷'}</div><div class="winfo"><div class="wname">${x.name||'(ном нест)'}</div><div class="wdet">@${x.login} · ${roleN(x.role)} · ${shiftN(x.shift)}</div></div><span class="wbdg">КОРМАНД</span></div>`).join('');
+  }catch(e){el.innerHTML='<div class="empt">❌ Хато</div>';}
+}
+
+// GREET
+function setupGreet(){
+  const n=new Date();const p=x=>String(x).padStart(2,'0');
+  const isD=n.getHours()>=6&&n.getHours()<20;
+  document.getElementById('moonEl').style.display=isD?'none':'block';
+  document.getElementById('gTime').textContent=`${p(n.getHours())}:${p(n.getMinutes())}`;
+  document.getElementById('gMsg').textContent=isD?'Рӯз ба Хайр,':'Шаб ба Хайр,';
+  const displayName=CU.name&&CU.name.length>0?CU.name.split(' ')[0]:'Дӯст';
+  document.getElementById('gName').textContent=displayName+'!';
+  document.getElementById('gDate').textContent=`📅 ${n.getDate()} ${MTG[n.getMonth()+1]} ${n.getFullYear()}`;
+  document.getElementById('gDS').textContent=`${n.getDate()}-уми ${MTG[n.getMonth()+1]}`;
+  gV=false;document.getElementById('gH').value='';document.getElementById('gH').placeholder='0–15';
+  const te=EN.find(e=>e.day===n.getDate());
+  if(te){
+    document.getElementById('gQ').innerHTML=`Имрӯз сабт шудааст: <span>${te.vxod?'🏠 Входной':te.hours+' соат'}</span>. Тағйир диҳем?`;
+    if(!te.vxod)document.getElementById('gH').value=te.hours;
+  }
+}
+function greetVx(){gV=true;document.getElementById('gH').placeholder='Входной 🏠';document.getElementById('gH').value='';toast('🏠 Входной интихоб шуд');}
+async function greetSave(){
+  const n=new Date();const hv=document.getElementById('gH').value;
+  if(!gV&&(hv===''||isNaN(parseFloat(hv)))){toast('❌ Соатро ворид кунед!');return;}
+  const hours=gV?0:parseFloat(hv);
+  if(!gV&&(hours<0||hours>15)){toast('❌ Соат 0–15 бошад!');return;}
+  await saveEN(n.getDate(),hours,gV);
+  toast(gV?'🏠 Входной сабт шуд!':'✅ '+hours+' соат сабт шуд!');
+  setTimeout(()=>goMain(),700);
+}
+function goGreet(){show('sGreet');setupGreet();}
+
+async function goMain(){
+  show('sMain');
+  // Reload fresh user from DB
+  try{
+    const fresh=await G('workers',`login=eq.${encodeURIComponent(CU.login)}`);
+    if(fresh.length&&fresh[0].name){
+      CU.name=fresh[0].name;
+      CU.role=fresh[0].role||CU.role||'worker';
+      CU.shift=fresh[0].shift||CU.shift||3;
+      localStorage.setItem('cu',JSON.stringify(CU));
+    }
+  }catch(e){}
+  await Promise.all([loadST(),loadEN()]);
+  const nm=(CU.name&&CU.name.trim().length>0)?CU.name:CU.login;
+  document.getElementById('uLbl').textContent='👤 '+nm;
+  updateUI();recalc();startClock();swTab(0);
+}
+
+// ENTRIES
+async function loadEN(){
+  const n=new Date();
+  try{EN=await G('entries',`login=eq.${encodeURIComponent(CU.login)}&month=eq.${n.getMonth()+1}&year=eq.${n.getFullYear()}&order=day.asc`);}
+  catch(e){EN=[];}
+}
+async function saveEN(day,hours,vxod){
+  const n=new Date();
+  try{
+    await UP('entries',{login:CU.login,day,month:n.getMonth()+1,year:n.getFullYear(),hours,vxod},'login,day,month,year');
+    await loadEN();recalc();if(document.getElementById('p1').classList.contains('on'))renderCal();
+  }catch(e){toast('❌ Хато: '+e.message);}
+}
+async function delEN(day){
+  const n=new Date();
+  try{
+    await D('entries',`login=eq.${encodeURIComponent(CU.login)}&day=eq.${day}&month=eq.${n.getMonth()+1}&year=eq.${n.getFullYear()}`);
+    await loadEN();recalc();renderCal();
+  }catch(e){toast('❌ Хато!');}
+}
+
+// EXTRA PAY
+async function saveExtra(){
+  const val=parseFloat(document.getElementById('extraInp').value)||0;
+  const n=new Date();
+  try{
+    await UP('entries',{login:CU.login,day:0,month:n.getMonth()+1,year:n.getFullYear(),hours:0,vxod:false,extra:val},'login,day,month,year');
+    // Store extra separately
+    localStorage.setItem(`extra_${CU.login}_${n.getFullYear()}_${n.getMonth()+1}`,val);
+    recalc();toast('✅ Иловапули сабт шуд!');
+  }catch(e){
+    localStorage.setItem(`extra_${CU.login}_${n.getFullYear()}_${n.getMonth()+1}`,val);
+    recalc();toast('✅ Иловапули сабт шуд!');
+  }
+}
+function getExtra(){
+  const n=new Date();
+  return parseFloat(localStorage.getItem(`extra_${CU.login}_${n.getFullYear()}_${n.getMonth()+1}`))||0;
+}
+
+// UI update based on role/shift
+function updateUI(){
+  const role=CU.role,shift=CU.shift;
+  // Info badge
+  const ib=document.getElementById('infoBadge');
+  const shiftNames={1:'🌅 1-юм смена (08:00–01:00)',2:'🌆 2-юм смена (17:00–08:00)',3:'🌙 3-юм смена (01:00–17:00)'};
+  if(shift&&shiftNames[shift]){
+    ib.textContent=shiftNames[shift];
+    ib.className='info-badge '+(shift===3?'ib-gold':shift===2?'ib-blue':'ib-red');
+    ib.style.display='inline-flex';
+  } else {
+    ib.style.display='none';
+  }
+  // Show/hide karchik row
+  document.getElementById('brKar').style.display=role==='karchik'?'flex':'none';
+  // Show/hide shift premium row
+  document.getElementById('brSme').style.display=(shift===2||shift===3)?'flex':'none';
+  // Profile
+  set('profName',(CU.name&&CU.name.length>0)?CU.name:CU.login);
+  set('profLogin','@'+CU.login);
+  set('profRole',role==='karchik'?'🏋️ Каршик':'👷 Коргари оддӣ');
+  set('profShift',shiftNames[shift]||'—');
+  // Extra pay label
+  const extraCard=document.getElementById('extraCard');
+  if(shift===1)extraCard.querySelector('.extra-title').textContent='➕ Иловапули / Премия';
+  else if(shift===2)extraCard.querySelector('.extra-title').textContent='➕ Иловапули';
+  else extraCard.querySelector('.extra-title').textContent='➕ Иловапули';
+  document.getElementById('extraInp').value=getExtra()||'';
+  updateProfileToggles();
+}
+
+// TABS
+function swTab(i){
+  [0,1,2].forEach(j=>{
+    document.getElementById('p'+j).classList.toggle('on',j===i);
+    document.querySelectorAll('.tab')[j].classList.toggle('on',j===i);
+  });
+  if(i===1)renderCal();
+}
+
+// CLOCK
+let CI;
+function startClock(){upCk();clearInterval(CI);CI=setInterval(upCk,1000);}
+function upCk(){
+  const n=new Date();const p=x=>String(x).padStart(2,'0');
+  set('mDate',`${DTG[n.getDay()]}, ${n.getDate()} ${MTG[n.getMonth()+1]}`);
+  set('mTime',`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`);
+  set('mMonth',MTG[n.getMonth()+1].toUpperCase());set('mYear',n.getFullYear());
+}
+
+// RECALC
+function recalc(){
+  const role=CU.role,shift=CU.shift;
+  const work=EN.filter(e=>!e.vxod&&e.day>0);
+  const totalH=work.reduce((s,e)=>s+(parseFloat(e.hours)||0),0);
+  const nW=work.length,nP=Math.min(nW,MD);
+  const hourly=totalH*ST.rate;
+  const lunch=nW*ST.lunch;
+  // Karchik premium per day
+  const karTotal=role==='karchik'?nP*Math.round(ST.kar/MD):0;
+  // Shift premium per day
+  const shiftPrem=shift===2?Math.round(ST.sme2/MD):shift===3?Math.round(ST.sme3/MD):0;
+  const shiftTotal=nP*shiftPrem;
+  // Food
+  let food=0;
+  if(totalH>=465)food=ST.f4;else if(totalH>=450)food=ST.f3;else if(totalH>=421)food=ST.f2;else if(totalH>=390)food=ST.f1;
+  // Extra
+  const extra=getExtra();
+  const total=hourly+lunch+karTotal+shiftTotal+food+extra;
+  // Today
+  const n=new Date();const te=EN.find(e=>e.day===n.getDate());
+  let todayE=0;if(te&&!te.vxod)todayE=(parseFloat(te.hours)||0)*ST.rate+ST.lunch+(role==='karchik'?Math.round(ST.kar/MD):0)+shiftPrem;
+  const pct=Math.min(totalH/465*100,100);
+  set('sTotal',fmt(total));set('sHours',totalH.toFixed(1));set('sDays',nW);set('sToday',fmt(todayE));
+  set('fAmt',food.toLocaleString()+' ₽');
+  const fb=document.getElementById('fBar');if(fb)fb.style.width=pct+'%';
+  [0,1,2,3].forEach(i=>{const el=document.getElementById('ti'+i);if(el)el.classList.remove('on');});
+  const ti=totalH>=465?3:totalH>=450?2:totalH>=421?1:totalH>=390?0:-1;
+  if(ti>=0){const el=document.getElementById('ti'+ti);if(el)el.classList.add('on');}
+  set('lHr',`Маоши соатӣ (${ST.rate}₽/с)`);
+  set('lLn',`Пули обед (${ST.lunch}₽/рӯз)`);
+  set('lKr',`Премия Каршик (~${Math.round(ST.kar/MD)}₽/рӯз)`);
+  set('lSm',shift===2?`Премия 2-смена (~${Math.round(ST.sme2/MD)}₽/рӯз)`:`Премия 3-смена (~${Math.round(ST.sme3/MD)}₽/рӯз)`);
+  set('tf0',ST.f1+'₽');set('tf1',ST.f2+'₽');set('tf2',ST.f3+'₽');set('tf3',ST.f4+'₽');
+  set('bHr',fmt(hourly)+' ₽');set('bLn',fmt(lunch)+' ₽');set('bKr',fmt(karTotal)+' ₽');
+  set('bSm',fmt(shiftTotal)+' ₽');set('bFd',food.toLocaleString()+' ₽');
+  set('bEx',extra.toLocaleString()+' ₽');set('bTl',fmt(total)+' ₽');
+}
+
+// CALENDAR
+function renderCal(){
+  const n=new Date();const today=n.getDate(),year=n.getFullYear(),month=n.getMonth()+1;
+  const td=new Date(year,month,0).getDate();
+  const role=CU.role,shift=CU.shift;
+  const shiftPrem=shift===2?Math.round(ST.sme2/MD):shift===3?Math.round(ST.sme3/MD):0;
+  const karDay=role==='karchik'?Math.round(ST.kar/MD):0;
+  const eMap={};EN.forEach(e=>eMap[e.day]=e);
+  let cH=0,cE=0,dN=0;const cM={};
+  for(let d=1;d<=today;d++){
+    const e=eMap[d];
+    if(e&&!e.vxod&&e.day>0){cH+=parseFloat(e.hours)||0;dN=Math.min(dN+1,MD);cE+=(parseFloat(e.hours)||0)*ST.rate+ST.lunch+karDay+shiftPrem;}
+    cM[d]={h:cH.toFixed(1),earn:Math.round(cE)};
+  }
+  let html='';
+  for(let d=1;d<=td;d++){
+    const dow=new Date(year,month-1,d).getDay();
+    const iF=d>today,iT=d===today,e=eMap[d];
+    let rc='crow'+(iF?' fut':iT?' tod':e&&e.vxod?' vxr':e?' hase':'');
+    let dc='cdn'+(iT?' tc':iF?' fc':'');
+    let st=iF?`<div class="cst no">—</div>`:
+      e&&e.vxod?`<div class="cst vx">🏠 Входной</div><div class="csub gy">Ҷамъ: ${(cM[d]?.earn||0).toLocaleString()} ₽</div>`:
+      e?`<div class="cst ok">✅ ${e.hours} соат</div><div class="csub gn">Ҷамъ: ${(cM[d]?.earn||0).toLocaleString()} ₽</div>`:
+      `<div class="cst no">⬜ Ворид нашуд</div>`;
+    let act='';
+    if(!iF){
+      if(!e){act=`<input class="cinp" type="number" id="ci${d}" placeholder="с" min="0" max="15" step="0.5"><div class="cacts"><button class="cb cbs" onclick="cS(${d})">💾</button><button class="cb cbv" onclick="cV(${d})">🏠</button></div>`;}
+      else{act=`<input class="cinp" type="number" id="ci${d}" value="${e.vxod?'':e.hours}" min="0" max="15" step="0.5" style="display:none"><div class="cacts" id="ca1_${d}"><button class="cb cbe" onclick="cE(${d})">✏️</button><button class="cb cbd" onclick="cD(${d})">✕</button></div><div class="cacts" id="ca2_${d}" style="display:none"><button class="cb cbs" onclick="cS(${d})">💾</button><button class="cb cbv" onclick="cV(${d})">🏠</button></div>`;}
+    }
+    html+=`<div class="${rc}"><div class="${dc}">${d}</div><div><div class="cdn2">${DSH[dow]}${iT?' 🔴':''}</div>${st}</div>${act}</div>`;
+  }
+  document.getElementById('calTable').innerHTML=html;
+}
+function cE(d){const i=document.getElementById('ci'+d),a1=document.getElementById('ca1_'+d),a2=document.getElementById('ca2_'+d);if(i)i.style.display='block';if(a1)a1.style.display='none';if(a2)a2.style.display='flex';if(i)i.focus();}
+async function cS(d){const h=parseFloat(document.getElementById('ci'+d)?.value);if(isNaN(h)||h<0||h>15){toast('❌ Соат 0–15 бошад!');return;}await saveEN(d,h,false);renderCal();toast(`✅ ${d}-уми: ${h} соат!`);}
+async function cV(d){await saveEN(d,0,true);renderCal();toast(`🏠 ${d}-уми: Входной!`);}
+async function cD(d){await delEN(d);toast(`🗑️ ${d}-уми ҳазф шуд`);}
+
+function fmt(v){return Math.round(v).toLocaleString();}
+function set(id,v){const el=document.getElementById(id);if(el)el.textContent=v;}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2800);}
+
+// TOGGLE ROLE in profile
+async function toggleRole(r){
+  if(r==='karchik'){
+    document.getElementById('pinBox2').style.display='block';
+    document.getElementById('pinInp2').value='';
+    document.getElementById('pinErr2').style.display='none';
+  } else {
+    document.getElementById('pinBox2').style.display='none';
+    await applyRole('worker');
+  }
+}
+
+async function confirmKarchik(){
+  const pin=document.getElementById('pinInp2').value;
+  if(pin!==KPIN){document.getElementById('pinErr2').style.display='block';return;}
+  document.getElementById('pinErr2').style.display='none';
+  document.getElementById('pinBox2').style.display='none';
+  await applyRole('karchik');
+}
+
+async function applyRole(r){
+  try{
+    await U('workers',`login=eq.${encodeURIComponent(CU.login)}`,{role:r});
+    CU.role=r;localStorage.setItem('cu',JSON.stringify(CU));
+    updateUI();updateProfileToggles();recalc();
+    toast(r==='karchik'?'✅ Каршик интихоб шуд!':'✅ Коргари оддӣ интихоб шуд!');
+  }catch(e){toast('❌ Хато!');}
+}
+
+async function toggleShift(s){
+  try{
+    await U('workers',`login=eq.${encodeURIComponent(CU.login)}`,{shift:s});
+    CU.shift=s;localStorage.setItem('cu',JSON.stringify(CU));
+    updateUI();updateProfileToggles();recalc();
+    const n={1:'1-юм смена',2:'2-юм смена',3:'3-юм смена'};
+    toast('✅ '+n[s]+' интихоб шуд!');
+  }catch(e){toast('❌ Хато!');}
+}
+
+function updateProfileToggles(){
+  // Role toggles
+  const gold='2px solid var(--gold)';const def='2px solid var(--brd)';
+  const goldbg='rgba(240,192,64,.08)';const defbg='var(--surf)';
+  const rt1=document.getElementById('rt1');
+  const rt2=document.getElementById('rt2');
+  if(rt1){rt1.style.border=CU.role==='worker'?gold:def;rt1.style.background=CU.role==='worker'?goldbg:defbg;}
+  if(rt2){rt2.style.border=CU.role==='karchik'?gold:def;rt2.style.background=CU.role==='karchik'?goldbg:defbg;}
+  // Shift toggles
+  [1,2,3].forEach(i=>{
+    const el=document.getElementById('st'+i);
+    if(el){el.style.border=CU.shift===i?gold:def;el.style.background=CU.shift===i?goldbg:defbg;}
+  });
+}
+
+// INIT
+async function init(){
+  try{
+    await loadST();
+    const s=localStorage.getItem('cu');
+    if(s){
+      CU=JSON.parse(s);
+      if(CU.role==='admin'){await showAdmin();}
+      else{
+        // Reload fresh user data from DB
+        try{
+          const fresh=await G('workers',`login=eq.${encodeURIComponent(CU.login)}`);
+          if(fresh.length){
+            CU.name=fresh[0].name||CU.name||CU.login;
+            CU.role=fresh[0].role||CU.role||'worker';
+            CU.shift=fresh[0].shift||CU.shift||3;
+            localStorage.setItem('cu',JSON.stringify(CU));
+          }
+        }catch(e){}
+        await loadEN();
+        const today=new Date().getDate();
+        const te=EN.find(e=>e.day===today);
+        if(!te){show('sGreet');setupGreet();}
+        else{goMain();}
+      }
+    }else{show('sLand');}
+  }catch(e){show('sLand');}
+}
+init();
+</script>
+</body>
+</html>
