@@ -289,6 +289,17 @@ body{font-family:'Mulish',sans-serif;min-height:100vh;color:var(--txt);overflow-
 </svg>
 </div>
 <div class="flag"><span class="r"></span><span class="w"></span><span class="g"></span></div>
+<!-- TICKER -->
+<div class="ticker-wrap" id="tickerWrap">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-icon">💰</span>
+    <span class="ticker-text" id="tickerText">АЗ КАССА ГИРИФТАН ЛОЗИМ: 0 ₽</span>
+    <span class="ticker-icon">💰</span>
+    <span class="ticker-text" id="tickerText2">АЗ КАССА ГИРИФТАН ЛОЗИМ: 0 ₽</span>
+    <span class="ticker-icon">💰</span>
+    <span class="ticker-text" id="tickerText3">АЗ КАССА ГИРИФТАН ЛОЗИМ: 0 ₽</span>
+  </div>
+</div>
 <div class="app">
 
 <!-- LOADING -->
@@ -521,23 +532,22 @@ body{font-family:'Mulish',sans-serif;min-height:100vh;color:var(--txt);overflow-
     </div>
 
     <!-- AVANS CARD -->
-    <div class="pay-card avans" id="avansCard" style="display:none">
-      <div class="pay-card-title">💳 Аванс (28-30-юм)</div>
-      <div class="pay-card-sub">Аванс дар карта чи қадар гирифтӣ?</div>
-      <div class="pay-inp-row">
-        <input class="pay-inp" type="number" id="avansInp" placeholder="0 ₽" min="0">
-        <button class="pay-btn avans" onclick="saveAvans()">💾 Сабт</button>
+    <div class="extra-card" id="avansCard">
+      <div class="extra-title">💳 Аванс (28-30-юм)</div>
+      <div style="font-size:11px;color:var(--mut);margin-bottom:10px;">Аванс дар карта чи қадар гирифтӣ?</div>
+      <div class="extra-row">
+        <input class="extra-inp" type="number" id="avansInp" placeholder="0 ₽" min="0">
+        <button class="extra-btn" onclick="saveAvans()">💾 Сабт</button>
       </div>
-      <div class="pay-result" id="avansResult"></div>
     </div>
 
     <!-- ZARPLATA CARD -->
-    <div class="pay-card zarplata" id="zarplataCard" style="display:none">
-      <div class="pay-card-title">💵 Зарплата (13-17-юм)</div>
-      <div class="pay-card-sub">Зарплата дар карта чи қадар гирифтӣ?</div>
-      <div class="pay-inp-row">
-        <input class="pay-inp" type="number" id="zarplataInp" placeholder="0 ₽" min="0">
-        <button class="pay-btn zarplata" onclick="saveZarplata()">💾 Сабт</button>
+    <div class="extra-card" id="zarplataCard">
+      <div class="extra-title">💵 Зарплата (13-17-юм)</div>
+      <div style="font-size:11px;color:var(--mut);margin-bottom:10px;">Зарплата дар карта чи қадар гирифтӣ?</div>
+      <div class="extra-row">
+        <input class="extra-inp" type="number" id="zarplataInp" placeholder="0 ₽" min="0">
+        <button class="extra-btn" onclick="saveZarplata()">💾 Сабт</button>
       </div>
       <div class="pay-result" id="zarplataResult"></div>
     </div>
@@ -1120,50 +1130,55 @@ function getSavedPay(type){return parseFloat(localStorage.getItem(payKey(type)))
 function savePay(type,val){localStorage.setItem(payKey(type),val);}
 
 function checkPayCards(){
-  const n=new Date();
-  const d=n.getDate();
   const avansCard=document.getElementById('avansCard');
   const zarplataCard=document.getElementById('zarplataCard');
 
-  // Avans: 28-30
-  if(d>=28&&d<=30){
-    avansCard.style.display='block';
-    const saved=getSavedPay('avans');
-    if(saved>0){
-      document.getElementById('avansInp').value=saved;
-      showPayResult('avans',saved);
-    }
-  } else {
-    avansCard.style.display='none';
+  // Ҳамавақт нишон дода шавад
+  avansCard.style.display='block';
+  zarplataCard.style.display='block';
+
+  const savedAvans=getSavedPay('avans');
+  if(savedAvans>0){
+    document.getElementById('avansInp').value=savedAvans;
+    showPayResult('avans',savedAvans);
   }
 
-  // Zarplata: 13-17
-  if(d>=13&&d<=17){
-    zarplataCard.style.display='block';
-    const saved=getSavedPay('zarplata');
-    if(saved>0){
-      document.getElementById('zarplataInp').value=saved;
-      showPayResult('zarplata',saved);
-    }
-  } else {
-    zarplataCard.style.display='none';
+  const savedZar=getSavedPay('zarplata');
+  if(savedZar>0){
+    document.getElementById('zarplataInp').value=savedZar;
+    showPayResult('zarplata',savedZar);
   }
 }
 
 function showPayResult(type,paid){
-  const total=parseFloat(document.getElementById('sTotal').textContent.replace(/\s/g,'').replace(',','.'))||0;
-  const avans=type==='zarplata'?getSavedPay('avans'):paid;
-  const zarplata=type==='zarplata'?paid:0;
-  const bokimonda=total-avans-zarplata;
+  const totalEl=document.getElementById('sTotal');
+  const totalStr=totalEl?totalEl.textContent.replace(/[\s,]/g,''):'0';
+  const total=parseFloat(totalStr)||0;
+  const avans=getSavedPay('avans');
+  const zarplata=getSavedPay('zarplata');
   const el=document.getElementById(type+'Result');
-  if(!el)return;
-  if(type==='avans'){
-    el.innerHTML=`💳 Аванс гирифтӣ: <b>${paid.toLocaleString()} ₽</b><br>📦 Боқимонда аз касса: <b>${Math.max(0,total-paid).toLocaleString()} ₽</b>`;
-  } else {
+
+  if(type==='zarplata'){
     const totalPaid=avans+zarplata;
-    el.innerHTML=`💵 Карта: <b>${paid.toLocaleString()} ₽</b> + Аванс: <b>${avans.toLocaleString()} ₽</b><br>📦 Боқимонда аз касса: <b>${Math.max(0,total-totalPaid).toLocaleString()} ₽</b>`;
+    const bokimonda=Math.max(0,total-totalPaid);
+    if(el){
+      el.innerHTML=`💵 Карта: <b>${zarplata.toLocaleString()} ₽</b> + Аванс: <b>${avans.toLocaleString()} ₽</b><br>📦 Боқимонда аз касса: <b style="color:var(--gold2);font-size:14px">${bokimonda.toLocaleString()} ₽</b>`;
+      el.classList.add('show');
+    }
+    // Show ticker
+    showTicker(bokimonda);
   }
-  el.classList.add('show');
+}
+
+function showTicker(bokimonda){
+  const wrap=document.getElementById('tickerWrap');
+  if(!wrap)return;
+  const msg=`АЗ КАССА ГИРИФТАН ЛОЗИМ: ${bokimonda.toLocaleString()} ₽`;
+  ['tickerText','tickerText2','tickerText3'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.textContent=msg;
+  });
+  wrap.classList.add('show');
 }
 
 function saveAvans(){
